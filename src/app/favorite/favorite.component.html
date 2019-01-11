@@ -1,0 +1,9 @@
+<div class="favorite-component">
+<mat-list role="list">
+  <mat-list-item 
+  role="listitem"
+  *ngFor="let items of favoriteList" (click)="toggleChart(items[0], items[1]) ">{{items[1]}}</mat-list-item>
+</mat-list>
+
+<app-chart *ngIf="showChart"></app-chart>
+<div class="currencies-component">

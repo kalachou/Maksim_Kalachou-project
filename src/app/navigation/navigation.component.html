@@ -1,0 +1,14 @@
+<nav mat-tab-nav-bar 
+	 mat-align-tabs="end"
+	 animationDuration="2000ms"
+   color="primary">
+  <a mat-tab-link
+     *ngFor="let link of navLinks"
+     [routerLink]="link.path"
+     
+     routerLinkActive #rla="routerLinkActive"
+     (click)="activeLink = link"
+     >
+    {{link.label}}
+  </a>
+</nav>

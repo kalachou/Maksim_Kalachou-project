@@ -1,0 +1,19 @@
+.currencies-list {
+	max-height: 80vh;
+	max-width: 30vw;
+	overflow-y: auto;
+}
+
+.currencies-list__item {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.currencies-component_positive-change {
+	background-color: green;
+}
+
+.currencies-component_negative-change {
+	background-color: red;
+}

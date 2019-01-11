@@ -1,0 +1,24 @@
+  <mat-form-field>
+  	
+	    <mat-label>Value</mat-label>
+	    <input type="number" min="0" matInput placeholder="Input amount" name="initialValue" [(ngModel)]="initialValue">
+	    <mat-select placeholder="Select initial currency" name="initialCurrency" [(ngModel)]="initialCurrency">
+	      <mat-option *ngFor="let rate of dailyRates" [value]="rate.Cur_Abbreviation">{{rate?.Cur_Abbreviation}}</mat-option>
+	      <mat-option *ngFor="let rate of monthlyRates" [value]="rate.Cur_Abbreviation">{{rate?.Cur_Abbreviation}}</mat-option>
+	    </mat-select>
+	    
+   </mat-form-field>
+
+  <button mat-raised-button color="primary" value="convert" (click)="calculate()">Convert to</button>
+
+   <mat-form-field>
+      	<mat-label>Destination</mat-label>
+	    <span id="destination-amount">{{targetValue}}</span>
+	    <mat-select placeholder="Select target currency" name="targetCurrency" [(ngModel)]="targetCurrency">
+	    	<mat-option [value]="rate.Cur_Abbreviation" *ngFor="let rate of dailyRates">{{rate?.Cur_Abbreviation}}</mat-option>
+	     	<mat-option [value]="rate.Cur_Abbreviation" *ngFor="let rate of monthlyRates">{{rate?.Cur_Abbreviation}}</mat-option>
+	    </mat-select>
+
+  </mat-form-field>
+
+

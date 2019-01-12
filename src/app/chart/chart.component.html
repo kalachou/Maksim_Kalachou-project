@@ -10,7 +10,9 @@
   <mat-datepicker #picker2></mat-datepicker>
 </mat-form-field>
 <button mat-raised-button color="primary" value="chart" (click)="updateCurrency()">apply dates</button>
-  <button mat-raised-button color="primary" (click)="toggleFavorite()">toggle favorite
-    <!--<mat-icon aria-label="Example icon-button with a heart icon">favorite</mat-icon>-->
+
+  <button mat-raised-button color="primary" (click)="toggleFavorite()">
+  	<i class="icon ion-md-heart"
+  	[class.active]="isFavorite()"></i>
   </button>
 <canvas id="myChart" width="600" height="400"></canvas>

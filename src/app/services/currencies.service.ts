@@ -19,32 +19,42 @@ export class CurrenciesService {
 	private month = this.currentDate.getMonth();
 	private date = this.currentDate.getDate();
 
-    constructor(private http: HttpClient) { }
-
-    public toggleFavorite() {
-
-        let propertyString = this.selectedCurrencyID.toString();
-        let unseenFavoritesList: Array<number> = localStorage['unseenFavoritesList'] 
+	private propertyString = this.selectedCurrencyID.toString();
+    private unseenFavoritesList: Array<number> = localStorage['unseenFavoritesList'] 
         ? JSON.parse(localStorage['unseenFavoritesList']) 
         : [];
 
-    	if(localStorage.hasOwnProperty(propertyString)) {
-      		localStorage.removeItem(propertyString);
-      		if (unseenFavoritesList.indexOf(this.selectedCurrencyID) > -1) {
-      			unseenFavoritesList = unseenFavoritesList.filter(x=>x!==this.selectedCurrencyID);
-      			localStorage.setItem('unseenFavoritesList', JSON.stringify(unseenFavoritesList));
+    constructor(private http: HttpClient) { }
+
+    public removeFavorite(currency: Array<any>) {
+      		localStorage.removeItem(currency[0]);
+      		if (this.unseenFavoritesList.indexOf(currency[0]) > -1) {
+      			this.unseenFavoritesList = this.unseenFavoritesList.filter(x=>x[0]!==currency[0]);
+      			localStorage.setItem('unseenFavoritesList', JSON.stringify(this.unseenFavoritesList));
       			localStorage.setItem('newItems', (Number(localStorage["newItems"]||1)-1).toString());
-      		}
+      		}    
+    }
+
+    public addFavorite(){
+    		this.unseenFavoritesList.push(this.selectedCurrencyID);
+      		localStorage.setItem(this.selectedCurrencyID.toString(), this.selectedCurrencyAbbreviation);
+      		localStorage.setItem('unseenFavoritesList', JSON.stringify(this.unseenFavoritesList));
+      		localStorage.setItem('newItems', (Number(localStorage["newItems"]||0)+1).toString());    
+    }
+
+    public toggleFavorite() {
+
+    	if(localStorage.hasOwnProperty(this.selectedCurrencyID.toString())) {
+    		const currencyToDelete = [this.selectedCurrencyID, this.selectedCurrencyAbbreviation];
+    		this.removeFavorite(currencyToDelete);
     	} else {
-    		unseenFavoritesList.push(this.selectedCurrencyID);
-      		localStorage.setItem(propertyString, this.selectedCurrencyAbbreviation);
-      		localStorage.setItem('unseenFavoritesList', JSON.stringify(unseenFavoritesList));
-      		localStorage.setItem('newItems', (Number(localStorage["newItems"]||0)+1).toString());
+    		this.addFavorite();
     	}
-    	this.onToggleFavorite.emit(unseenFavoritesList.length);
+    	this.onToggleFavorite.emit(Number(localStorage["newItems"]||0));
     }
 
     public cleanUnseenFavorites() {
+    	this.unseenFavoritesList.length = 0;
     	localStorage.removeItem('newItems');
     	localStorage.removeItem('unseenFavoritesList');
     	this.onToggleFavorite.emit(0);

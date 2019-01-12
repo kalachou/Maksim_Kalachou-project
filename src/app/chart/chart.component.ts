@@ -73,4 +73,8 @@ updateCurrency() {
     this.share.toggleFavorite();
   }
 
+  isFavorite() {
+    return localStorage[`${this.selectedCurrencyID}`];
+  }
+
 }

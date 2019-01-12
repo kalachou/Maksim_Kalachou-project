@@ -26,6 +26,7 @@ export class CurrenciesListComponent implements OnInit {
   constructor(private currenciesService: CurrenciesService) {}
 
 	selectCurrency(id, abbr) {
+		this.selectedCurrencyName = abbr;
 		this.currenciesService.selectCurrency(id, abbr);
 	}
 

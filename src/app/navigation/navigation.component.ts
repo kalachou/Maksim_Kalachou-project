@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { CurrenciesService} from '../services/currencies.service';
 
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.css']
 })
+
 export class NavigationComponent implements OnInit {
 
-  constructor() { }
+  public unseenFavorites: string = localStorage["newItems"];
 
   public navLinks = [
     {label: 'Currencies', path: '/currencies'},
@@ -15,8 +17,22 @@ export class NavigationComponent implements OnInit {
     {label: 'About', path: '/about'},
     {label: 'Favorite', path: '/favorite'}
   ];
-  activeLink = this.navLinks[0];
+
+  activeLink = null;
+
+  constructor(private unseenFavoriteCounter: CurrenciesService) { 
+
+    this.unseenFavoriteCounter.onToggleFavorite.subscribe(count => {
+      this.unseenFavorites = count;
+    });
+
+  }
+
   ngOnInit() {
+  }
+
+  clearUnseenFavorites(){
+    this.unseenFavoriteCounter.cleanUnseenFavorites();
   }
 
 }

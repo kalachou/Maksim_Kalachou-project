@@ -13,8 +13,8 @@ export class ChartComponent implements OnInit {
 private selectedCurrencyID = 145;
 private selectedCurrencyName = 'USD';
 private currentDate: Date = new Date();
- finishDate: Date = new Date();
-private startDate: Date = new Date(this.currentDate.setDate(this.currentDate.getDate() - 30));
+public finishDate: Date = new Date();
+public startDate: Date = new Date(this.currentDate.setDate(this.currentDate.getDate() - 30));
 
     date = new FormControl(this.startDate);
   serializedDate = new FormControl(this.finishDate.toISOString().split('T')[0]);
@@ -28,6 +28,7 @@ private startDate: Date = new Date(this.currentDate.setDate(this.currentDate.get
   this.selectedCurrencyName = id[1];
   this.selectedCurrencyID = id[0];
   this.updateCurrency(); });
+
   }
 
   ngOnInit() {
@@ -62,20 +63,14 @@ updateCurrency() {
     this.myChart['data']['datasets'] = [{}];
     this.myChart['data']['datasets'][0]['label'] = this.selectedCurrencyName;
     this.myChart['data']['datasets'][0]['data'] = rates;
-    this.myChart['data']['datasets'][0]['borderColor'] = 'rgb(188,8,169)';
+    this.myChart['data']['datasets'][0]['borderColor'] = '#7b1fa2';
 
     this.myChart.update();
   });
 }
 
   toggleFavorite() {
-    let propertyString = this.selectedCurrencyID+'';
-    if(localStorage.hasOwnProperty(this.selectedCurrencyID)) {
-      localStorage.removeItem(propertyString);
-    } else {
-      localStorage.setItem(propertyString, this.selectedCurrencyName);
-    }
-
+    this.share.toggleFavorite();
   }
 
 }

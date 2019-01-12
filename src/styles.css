@@ -5,3 +5,8 @@ body {
 	background-color: #212121;
 	color: white;
 }
+
+a {
+	text-decoration: none;
+	color: #7b1fa2;
+}

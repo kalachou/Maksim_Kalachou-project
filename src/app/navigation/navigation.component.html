@@ -8,6 +8,7 @@
      
      routerLinkActive #rla="routerLinkActive"
      (click)="activeLink = link"
+     (click)="firstVisit()"
      (click)="activeLink.label == 'Favorite' ? clearUnseenFavorites() : false"
      [active]="activeLink == link">
 
@@ -19,7 +20,7 @@
     [matBadge]="'+'+unseenFavorites" 
     matBadgeColor="warn" 
     matBadgePosition="above before" 
-    *ngIf="unseenFavorites">
+    *ngIf="showUnseenFavorites()">
 
   </div>
 </nav>

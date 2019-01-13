@@ -9,7 +9,7 @@ import { CurrenciesService} from '../services/currencies.service';
 
 export class NavigationComponent implements OnInit {
 
-  public unseenFavorites: string = localStorage["newItems"];
+  public unseenFavorites: string = localStorage['newItems'];
 
   public navLinks = [
     {label: 'Currencies', path: '/currencies'},
@@ -20,7 +20,7 @@ export class NavigationComponent implements OnInit {
 
   activeLink = null;
 
-  constructor(private unseenFavoriteCounter: CurrenciesService) { 
+  constructor(private unseenFavoriteCounter: CurrenciesService) {
 
     this.unseenFavoriteCounter.onToggleFavorite.subscribe(count => {
       this.unseenFavorites = count;
@@ -31,8 +31,20 @@ export class NavigationComponent implements OnInit {
   ngOnInit() {
   }
 
-  clearUnseenFavorites(){
+  clearUnseenFavorites() {
     this.unseenFavoriteCounter.cleanUnseenFavorites();
+  }
+
+  showUnseenFavorites() {
+    if (!this.unseenFavorites || this.activeLink.label === 'Favorite') {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  firstVisit() {
+    localStorage.setItem('firstVisit', 'visited');
   }
 
 }

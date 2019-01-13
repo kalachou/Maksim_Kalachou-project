@@ -7,13 +7,14 @@
 	<app-preloader *ngIf="showPreloader"></app-preloader>
 	<button mat-list-item >Daily rated</button>
   <button 
-  mat-list-item 
+  mat-list-item   
   routerLink="/currencies/chart"
-  [class.active]="rate.Cur_Abbreviation == selectedCurrencyName"
-  *ngFor="let rate of filteredDailyRates" (click)="selectCurrency(rate?.Cur_ID, rate?.Cur_Abbreviation)">	
-  		<div class="currencies-list__item">	
+  [class.active]="(rate.Cur_Abbreviation == selectedCurrencyName)&&chartIsShowed"
+  *ngFor="let rate of filteredDailyRates" (click)="selectCurrency(rate?.Cur_ID, rate?.Cur_Abbreviation, rate?.Cur_Name_Eng)"
+  [title]="rate?.Cur_Name_Eng">	
+  		<div class="currencies-list__currency ">	
 
-  			<span>{{rate?.Cur_Scale | currency:rate?.Cur_Abbreviation:'symbol-narrow'}}</span>
+  			<span class="currenciy__label">{{rate?.Cur_Scale | currency:rate?.Cur_Abbreviation:'symbol-narrow'}}</span>
         	<span>{{rate?.Cur_Abbreviation}}</span>
         	<span>{{rate?.Cur_OfficialRate}}</span>
         	
@@ -24,9 +25,11 @@
    <button
   mat-list-item 
   routerLink="/currencies/chart"
-  *ngFor="let rate of filteredMonthlyRates" (click)="selectCurrency(rate?.Cur_ID, rate?.Cur_Abbreviation)">			
-  		<div class="currencies-list__item">		
-  			<span>{{rate?.Cur_Scale | currency:rate?.Cur_Abbreviation:'symbol-narrow'}}</span>
+  [class.active]="(rate.Cur_Abbreviation == selectedCurrencyName)&&chartIsShowed"
+  *ngFor="let rate of filteredMonthlyRates" (click)="selectCurrency(rate?.Cur_ID, rate?.Cur_Abbreviation)"
+  [title]="rate?.Cur_Name_Eng">			
+  		<div class="currencies-list__currency ">		
+  			<span class="currenciy__label">{{rate?.Cur_Scale | currency:rate?.Cur_Abbreviation:'symbol-narrow'}}</span>
         	<span>{{rate?.Cur_Abbreviation}}</span>
         	<span>{{rate?.Cur_OfficialRate}}</span>
         	

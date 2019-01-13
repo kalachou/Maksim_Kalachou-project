@@ -2,7 +2,7 @@
 
 <mat-chip-list class="mat-chip-list-stacked">
   <mat-chip 
-  *ngFor="let item of favoriteList" (click)="toggleChart(item[0], item[1]) "
+  *ngFor="let item of favoriteList" (click)="toggleChart(item[0], item[1], item[2]) "
   [selectable]="selectable"
   [removable]="removable" 
   (removed)="removeFavorite(item)"

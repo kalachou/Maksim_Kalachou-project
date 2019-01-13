@@ -12,7 +12,8 @@ export class CurrenciesListComponent implements OnInit {
 	selectedCurrencyID = 145;
 	selectedCurrencyName = 'USD';
 
-  showPreloader = true;
+  showPreloader: boolean = true;
+  chartIsShowed: boolean = false;
   abbreviation;
 
   dailyRates: any;
@@ -23,22 +24,25 @@ export class CurrenciesListComponent implements OnInit {
   filteredDailyRates: any;
   filteredMonthlyRates: any;
 
-  constructor(private currenciesService: CurrenciesService) {}
+  constructor(private currenciesService: CurrenciesService) {
+  	this.currenciesService.onToggleChart.subscribe(x=>this.chartIsShowed = x);
+  }
 
-	selectCurrency(id, abbr) {
+	selectCurrency(id: number, abbr: string, name: string): void {
+		this.chartIsShowed = true;
 		this.selectedCurrencyName = abbr;
-		this.currenciesService.selectCurrency(id, abbr);
+		this.currenciesService.selectCurrency(id, abbr, name);
 	}
 
- 	assignCopyDailyRates() {
+ 	assignCopyDailyRates(): void {
 	   this.filteredDailyRates = Object.assign([], this.dailyRates);
 	}
 
-   	assignCopyMonthlyRates() {
+   	assignCopyMonthlyRates(): void {
 	   this.filteredMonthlyRates = Object.assign([], this.monthlyRates);
 	}
 
-	assignCopy() {
+	assignCopy(): void {
 		this.assignCopyDailyRates();
 		this.assignCopyMonthlyRates();
 	}
@@ -47,6 +51,7 @@ export class CurrenciesListComponent implements OnInit {
 	  this.currenciesService.getCurrentDailyRates().subscribe(data => {
 		  this.dailyRates = data[0];
 		  this.previousDailyRates = data[1];
+		  const currenciesInfo: any = data[2];
 		  this.dailyRates.forEach((item, index) => {
 		  	const difference = (item.Cur_OfficialRate - this.previousDailyRates[index].Cur_OfficialRate).toFixed(4);
 		  	let differenceString;
@@ -56,6 +61,8 @@ export class CurrenciesListComponent implements OnInit {
 		  		differenceString = difference.toString();
 		  	}
 		  	item.Difference = differenceString;
+
+		  	item.Cur_Name_Eng = currenciesInfo.find(x=>x['Cur_ID']==item.Cur_ID)['Cur_Name_Eng'];
 		  });
 		  this.assignCopyDailyRates();
 	  });
@@ -63,6 +70,7 @@ export class CurrenciesListComponent implements OnInit {
 	  this.currenciesService.getCurrentMonthlyRates().subscribe(data => {
 		  this.monthlyRates = data[0];
 		  this.previousMonthlyRates = data[1];
+		  const currenciesInfo: any = data[2];
 		  this.monthlyRates.forEach((item, index) => {
 		  	const difference: number = +(item.Cur_OfficialRate - this.previousMonthlyRates[index].Cur_OfficialRate).toFixed(4);
 		  	let differenceString;
@@ -72,13 +80,13 @@ export class CurrenciesListComponent implements OnInit {
 		  		differenceString = difference.toString();
 		  	}
 		  	item.Difference = differenceString;
+
+		  	item.Cur_Name_Eng = currenciesInfo.find(x=>x['Cur_ID']==item.Cur_ID)['Cur_Name_Eng'];
 		  });
 		  this.assignCopyMonthlyRates();
 		  this.showPreloader = false;
 	  });
   }
-
-
 
 	filterList(value) {
 	// when nothing has typed
@@ -92,6 +100,12 @@ export class CurrenciesListComponent implements OnInit {
 	         item => item.Cur_Abbreviation.toLowerCase().indexOf(value.toLowerCase()) > -1
 	      );
 	    }
+	}
+
+	disableHint() {
+		if(!localStorage['currenciesVisited']) {
+			localStorage.setItem('currenciesVisited', 'true');
+		}
 	}
 
 }

@@ -5,4 +5,5 @@ export class CurrencyRate {
 	Cur_Scale: number;
 	Cur_OfficialRate: number;
 	Difference: string;
+	Cur_Name_Eng: string;
 }

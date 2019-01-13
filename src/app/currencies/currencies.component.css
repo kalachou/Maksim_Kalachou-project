@@ -2,3 +2,84 @@
 	display: inline-flex;
 }
 
+.currencies__chart {
+	width: 68vw;
+	height: 80vh;
+}
+
+/*arrow*/
+.arrow {
+    pointer-events: none;
+    position: relative;
+    margin: 0 auto;
+    width: 100px;
+    top: -350px;
+}
+
+.bottom-left .curve {
+    pointer-events: none;
+    border: 4px solid #7b1fa2;
+    border-color: #7b1fa2 transparent transparent transparent;
+    height: 700px;
+    width: 499px;
+    border-radius: 700px 1100px 0 0;
+    transform: rotate(150deg);
+}
+
+.bottom-left .point {
+    position: absolute;
+    right: -75px;
+    top: 609px;
+}
+
+.bottom-left .point:before {
+    top: 46px;
+    right: -80px;
+    transform: rotate(70deg);
+    -webkit-transform: rotate(130deg);
+    -moz-transform: rotate(70deg);
+    -ms-transform: rotate(70deg);
+}
+
+.bottom-left .point:before, .arrow .point:after {
+    pointer-events: none;
+    border: 1.5pt solid #7b1fa2;
+    border-radius: 2px;
+    background-color: #7b1fa2;
+    height: 25px;
+    content: "";
+    position: absolute;
+}
+
+*:before, *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.bottom-left .point:after {
+    top: 39px;
+    right: -84px;
+    transform: rotate(120deg);
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(120deg);
+    -ms-transform: rotate(120deg);
+}
+
+.bottom-left .point:before, .arrow .point:after {
+    pointer-events: none;
+    border: 1.5pt solid #7b1fa2;
+    border-radius: 2px;
+    background-color: #7b1fa2;
+    height: 25px;
+    content: "";
+    position: absolute;
+}
+
+.arrow__closer {
+	position: relative;
+    top: 158px;
+    left: 160px;
+    cursor: pointer;
+    z-index: 999;
+}

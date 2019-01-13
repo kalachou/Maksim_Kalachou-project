@@ -1,14 +1,20 @@
 .currencies-list {
 	max-height: 80vh;
-	max-width: 30vw;
+	width: 30vw;
 	overflow-y: scroll;
 }
 
-.currencies-list__item {
+.currencies-list__currency {
     width: 100%;
     display: flex;
     justify-content: space-between;
 
+}
+
+.currenciy__label {
+	padding: 2px;
+	border-radius: 5px;
+	background-color: gray;
 }
 
 .currencies-component_positive-change {
@@ -22,6 +28,14 @@
 	background-color: red;
 }
 
+button {
+	border-radius: 5px;
+}
+
 button.active {
 	background-color: #7b1fa2;
+}
+
+button:hover {
+	background-color: #ae1af2;
 }

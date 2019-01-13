@@ -10,8 +10,9 @@ import {FormControl} from '@angular/forms';
 })
 export class ChartComponent implements OnInit {
 
-private selectedCurrencyID = 145;
-private selectedCurrencyName = 'USD';
+private selectedCurrencyID;
+private selectedCurrencyName;
+private selectedCurrencyFullName;
 private currentDate: Date = new Date();
 public finishDate: Date = new Date();
 public startDate: Date = new Date(this.currentDate.setDate(this.currentDate.getDate() - 30));
@@ -23,16 +24,27 @@ public startDate: Date = new Date(this.currentDate.setDate(this.currentDate.getD
 	myChart;
 
   constructor(private share: CurrenciesService) {
-
-  this.share.onSelectCurrency.subscribe(id => {
-  this.selectedCurrencyName = id[1];
-  this.selectedCurrencyID = id[0];
-  this.updateCurrency(); });
+    this.selectedCurrencyID = this.share.getSelectedCurrency()[0];
+    this.selectedCurrencyName = this.share.getSelectedCurrency()[1];
+    this.selectedCurrencyFullName = this.share.getSelectedCurrency()[2];
+    this.updateCurrency();
+    this.share.onSelectCurrency.subscribe(id => {
+      this.selectedCurrencyName = id[1];
+      this.selectedCurrencyID = id[0];
+      this.selectedCurrencyFullName = this.share.getSelectedCurrency()[2];
+      this.updateCurrency(); 
+      });
 
   }
 
   ngOnInit() {
-     this.ctx = document.querySelector('#myChart');
+    this.share.enableShowedChartCurrencyMark();
+
+    this.ctx = document.querySelector('#myChart');
+    this.ctx.getContext('2d');
+
+
+
     this.myChart = new Chart(this.ctx, {
       // The type of chart we want to create
       type: 'line',
@@ -44,7 +56,8 @@ public startDate: Date = new Date(this.currentDate.setDate(this.currentDate.getD
       // Configuration options go here
       options: {}
     });
-  this.updateCurrency();
+
+  //this.updateCurrency();
 }
 
 updateCurrency() {
@@ -52,7 +65,7 @@ updateCurrency() {
     const startDateString = this.startDate.toISOString().split('T')[0];
     let a;
 
-  fetch(`http://www.nbrb.by/API/ExRates/Rates/Dynamics/${this.selectedCurrencyID}?startDate=${startDateString}&endDate=${finishDateString}`)
+  fetch(`https://www.nbrb.by/API/ExRates/Rates/Dynamics/${this.selectedCurrencyID}?startDate=${startDateString}&endDate=${finishDateString}`)
   .then(x => x.json())
   .then(x => {
     a = x;
@@ -61,7 +74,7 @@ updateCurrency() {
 
     this.myChart['data']['labels'] = dates;
     this.myChart['data']['datasets'] = [{}];
-    this.myChart['data']['datasets'][0]['label'] = this.selectedCurrencyName;
+    this.myChart['data']['datasets'][0]['label'] = `${this.selectedCurrencyName} ${this.selectedCurrencyFullName}`;
     this.myChart['data']['datasets'][0]['data'] = rates;
     this.myChart['data']['datasets'][0]['borderColor'] = '#7b1fa2';
 

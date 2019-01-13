@@ -1,0 +1,9 @@
+:host {
+	overflow-y: hidden;
+	height: 80vh;
+}
+
+.home__hint {
+	position: relative;
+	top: 150px;
+}

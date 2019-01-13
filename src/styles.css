@@ -16,3 +16,94 @@ a {
 	text-decoration: none;
 	color: #7b1fa2;
 }
+
+.arrow {
+    pointer-events: none;
+    position: relative;
+    margin: 0 auto;
+    width: 100px;
+    left: -300px;
+    top: -180px;
+}
+
+.top-right .curve {
+    pointer-events: none;
+    border: 4px solid #7b1fa2;
+    border-color: #7b1fa2 transparent transparent transparent;
+    height: 700px;
+    width: 499px;
+    border-radius: 300px 1100px 0 0;
+    transform: rotate(-40deg);
+}
+
+.top-right .point {
+    position: absolute;
+    right: -20px;
+    top: 32px;
+}
+
+.top-right .point:before {
+    top: 46px;
+    right: -80px;
+    transform: rotate(70deg);
+    -webkit-transform: rotate(70deg);
+    -moz-transform: rotate(70deg);
+    -ms-transform: rotate(70deg);
+}
+
+.top-right .point:before, .arrow .point:after {
+    pointer-events: none;
+    border: 1.5pt solid #7b1fa2;
+    border-radius: 2px;
+    background-color: #7b1fa2;
+    height: 25px;
+    content: "";
+    position: absolute;
+}
+
+*:before, *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.top-right .point:after {
+    top: 37px;
+    right: -81px;
+    transform: rotate(120deg);
+    -webkit-transform: rotate(120deg);
+    -moz-transform: rotate(120deg);
+    -ms-transform: rotate(120deg);
+}
+
+.top-right .point:before, .arrow .point:after {
+    pointer-events: none;
+    border: 1.5pt solid #7b1fa2;
+    border-radius: 2px;
+    background-color: #7b1fa2;
+    height: 25px;
+    content: "";
+    position: absolute;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 2px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #7b1fa2; 
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #212121; 
+}

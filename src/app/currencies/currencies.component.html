@@ -1,4 +1,19 @@
 <div class="currencies-component">
 	<app-currencies-list></app-currencies-list>
-	<router-outlet></router-outlet>
+	<div class="arrow bottom-left"
+		*ngIf="!isCurrenciesVisited()&&!isChartShowed">
+      <div class="curve"></div>
+      <div class="point"></div>
+	</div>
+	<i class="icon ion-md-close-circle arrow__closer" 
+	(click)="disableArrowHint()" 
+	*ngIf="!isCurrenciesVisited()&&!isChartShowed"></i>
+	<div *ngIf="!isChartShowed">
+		
+		<h2>Select any currency</h2>
+		<h2>An apropriate chart will appear after the selection </h2>
+		<h2>You can see currencies' full name on mouse hover </h2>
+	</div>
+	
+	<router-outlet ></router-outlet>
 <div>

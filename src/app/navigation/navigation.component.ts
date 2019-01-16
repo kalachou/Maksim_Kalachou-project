@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CurrenciesService} from '../services/currencies.service';
+import { CurrenciesService } from '../services/currencies.service';
 
 @Component({
   selector: 'app-navigation',
@@ -12,10 +12,10 @@ export class NavigationComponent implements OnInit {
   public unseenFavorites: string = localStorage['newItems'];
 
   public navLinks = [
-    {label: 'Currencies', path: '/currencies'},
-    {label: 'Calculator', path: '/calculator'},
-    {label: 'About', path: '/about'},
-    {label: 'Favorite', path: '/favorite'}
+    { label: 'Currencies', path: '/currencies' },
+    { label: 'Calculator', path: '/calculator' },
+    { label: 'About', path: '/about' },
+    { label: 'Favorite', path: '/favorite' }
   ];
 
   activeLink = null;

@@ -1,16 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
-import {HttpClientModule} from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatNativeDateModule} from '@angular/material';
-import {MaterialModule} from './material/material.module';
-
-
-
-
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatNativeDateModule } from '@angular/material';
+import { MaterialModule } from './material/material.module';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,12 +16,11 @@ import { CurrenciesComponent } from './currencies/currencies.component';
 import { FavoriteComponent } from './favorite/favorite.component';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { CurrencySearchComponent } from './currency-search/currency-search.component';
 import { CurrenciesListComponent } from './currencies-list/currencies-list.component';
 import { PreloaderComponent } from './preloader/preloader.component';
 import { ChartComponent } from './chart/chart.component';
 import { NavigationComponent } from './navigation/navigation.component';
-import { CurrenciesService} from './services/currencies.service';
+import { CurrenciesService } from './services/currencies.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +31,6 @@ import { CurrenciesService} from './services/currencies.service';
     FavoriteComponent,
     HomeComponent,
     NotFoundComponent,
-    CurrencySearchComponent,
     CurrenciesListComponent,
     PreloaderComponent,
     ChartComponent,

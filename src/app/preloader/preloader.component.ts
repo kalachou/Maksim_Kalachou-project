@@ -5,10 +5,12 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './preloader.component.html',
   styleUrls: ['./preloader.component.css']
 })
+
 export class PreloaderComponent implements OnInit {
-	color = 'green';
+  color = 'green';
   mode = 'indeterminate';
   value = 50;
+
   constructor() { }
 
   ngOnInit() {

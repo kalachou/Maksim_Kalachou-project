@@ -10,15 +10,15 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ChartComponent } from './chart/chart.component';
 
 const currencyRoutes: Routes = [
-    { path: 'chart', component: ChartComponent}
+  { path: 'chart', component: ChartComponent }
 ];
 
 const appRoutes: Routes = [
-  { path: '', component: HomeComponent},
-  { path: 'currencies', component: CurrenciesComponent, children: currencyRoutes},
-  { path: 'calculator', component: CalculatorComponent},
-  { path: 'about', component: AboutComponent},
-  { path: 'favorite', component: FavoriteComponent},
+  { path: '', component: HomeComponent },
+  { path: 'currencies', component: CurrenciesComponent, children: currencyRoutes },
+  { path: 'calculator', component: CalculatorComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'favorite', component: FavoriteComponent },
   { path: '**', component: NotFoundComponent }
 ];
 

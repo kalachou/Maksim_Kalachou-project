@@ -1,40 +1,36 @@
-<input matInput type="text" placeholder="Search" [(ngModel)]="abbreviation" (input)="filterList(abbreviation)">
+<input matInput type="text" placeholder="Search" [(ngModel)]="abbreviation" (keyup)="filterList(abbreviation)">
 
 
 
-<mat-action-list class="currencies-list">
+<mat-action-list class="currencies-list" cdkDropList (cdkDropListDropped)="dropDailyRate($event)">
 
-	<app-preloader *ngIf="showPreloader"></app-preloader>
-	<button mat-list-item >Daily rated</button>
-  <button 
-  mat-list-item   
-  routerLink="/currencies/chart"
-  [class.active]="(rate.Cur_Abbreviation == selectedCurrencyName)&&chartIsShowed"
-  *ngFor="let rate of filteredDailyRates" (click)="selectCurrency(rate?.Cur_ID, rate?.Cur_Abbreviation, rate?.Cur_Name_Eng)"
-  [title]="rate?.Cur_Name_Eng">	
-  		<div class="currencies-list__currency ">	
+  <app-preloader *ngIf="showPreloader"></app-preloader>
+  <button mat-list-item>Daily rated</button>
+  <button mat-list-item routerLink="/currencies/chart" [class.active]="(rate.Cur_Abbreviation == selectedCurrencyName)&&chartIsShowed"
+    *ngFor="let rate of filteredDailyRates" (click)="selectCurrency(rate?.Cur_ID, rate?.Cur_Abbreviation, rate?.Cur_Name_Eng)"
+    [title]="rate?.Cur_Name_Eng" cdkDrag>
+    <div class="currencies-list__currency ">
 
-  			<span class="currenciy__label">{{rate?.Cur_Scale | currency:rate?.Cur_Abbreviation:'symbol-narrow'}}</span>
-        	<span>{{rate?.Cur_Abbreviation}}</span>
-        	<span>{{rate?.Cur_OfficialRate}}</span>
-        	
-        	<div mat-raised-button [ngClass]="{'currencies-component_positive-change': true, 'currencies-component_negative-change': (+rate?.Difference < 0)}">{{rate?.Difference}}</div>
-        </div>
-   </button>
-   <button mat-list-item >Monthly rated</button>
-   <button
-  mat-list-item 
-  routerLink="/currencies/chart"
-  [class.active]="(rate.Cur_Abbreviation == selectedCurrencyName)&&chartIsShowed"
-  *ngFor="let rate of filteredMonthlyRates" (click)="selectCurrency(rate?.Cur_ID, rate?.Cur_Abbreviation)"
-  [title]="rate?.Cur_Name_Eng">			
-  		<div class="currencies-list__currency ">		
-  			<span class="currenciy__label">{{rate?.Cur_Scale | currency:rate?.Cur_Abbreviation:'symbol-narrow'}}</span>
-        	<span>{{rate?.Cur_Abbreviation}}</span>
-        	<span>{{rate?.Cur_OfficialRate}}</span>
-        	
-        	<span [ngClass]="{'currencies-component_positive-change': true, 'currencies-component_negative-change': (+rate?.Difference < 0)}">{{rate?.Difference}}</span>
-        </div>
-   </button>
+      <span class="currenciy__label">{{rate?.Cur_Scale | currency:rate?.Cur_Abbreviation:'symbol-narrow'}}</span>
+      <span>{{rate?.Cur_Abbreviation}}</span>
+      <span>{{rate?.Cur_OfficialRate}}</span>
+
+      <div mat-raised-button [ngClass]="{'currencies-component_positive-change': true, 'currencies-component_negative-change': (+rate?.Difference < 0)}">{{rate?.Difference}}</div>
+    </div>
+  </button>
+  <button mat-list-item cdkDropList (cdkDropListDropped)="dropMonthlyRate($event)">
+    Monthly rated
+  </button>
+  <button mat-list-item routerLink="/currencies/chart" [class.active]="(rate.Cur_Abbreviation == selectedCurrencyName)&&chartIsShowed"
+    *ngFor="let rate of filteredMonthlyRates" (click)="selectCurrency(rate?.Cur_ID, rate?.Cur_Abbreviation)" [title]="rate?.Cur_Name_Eng"
+    cdkDrag>
+    <div class="currencies-list__currency ">
+      <span class="currency__label">{{rate?.Cur_Scale | currency:rate?.Cur_Abbreviation:'symbol-narrow'}}</span>
+      <span>{{rate?.Cur_Abbreviation}}</span>
+      <span>{{rate?.Cur_OfficialRate}}</span>
+
+      <span [ngClass]="{'currencies-component_positive-change': true, 'currencies-component_negative-change': (+rate?.Difference < 0)}">{{rate?.Difference}}</span>
+    </div>
+  </button>
 
 </mat-action-list>

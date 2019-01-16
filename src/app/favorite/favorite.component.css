@@ -3,8 +3,8 @@
 }
 
 .mat-chip-list-stacked {
-	min-width: 5rem;
-	margin-right: 1rem;
+	min-width: 6rem;
+	margin-right: 2rem;
 }
 
 .mat-chip {
@@ -14,4 +14,9 @@
 
 .mat-chip.active {
 	background-color: #7b1fa2;
+}
+
+.favorites__icon {
+	font-size: 5rem;
+	display: block;
 }

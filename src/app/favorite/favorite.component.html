@@ -1,20 +1,20 @@
 <div class="favorite-component">
+  <div>
+    <mat-chip-list
+    class="mat-chip-list-stacked">
+      <mat-chip
+      *ngFor="let item of favoriteList"
+      (click)="toggleChart(item[0], item[1], item[2])"
+      [selectable]="selectable"
+      [removable]="removable"
+      (removed)="removeFavorite(item)"
+      [class.active]="item[0] == showedCurrencyChart"
+      cdkDrag>
+        {{item[1]}} {{item[2]}}
+        <i class="icon ion-md-close-circle" *ngIf="removable" matChipRemove></i>
+      </mat-chip>
+    </mat-chip-list>
+  </div>
 
-<mat-chip-list class="mat-chip-list-stacked">
-  <mat-chip 
-  *ngFor="let item of favoriteList" (click)="toggleChart(item[0], item[1], item[2]) "
-  [selectable]="selectable"
-  [removable]="removable" 
-  (removed)="removeFavorite(item)"
-  [class.active]="item[0] == showedCurrencyChart">
-    {{item[1]}}
-    <i class="icon ion-md-close-circle" 
-    *ngIf="removable"
-    matChipRemove
-    ></i>
-
-  </mat-chip>
-</mat-chip-list>
-
-<app-chart *ngIf="showChart"></app-chart>
-<div class="currencies-component">
+  <app-chart *ngIf="showChart"></app-chart>
+</div>

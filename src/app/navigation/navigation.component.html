@@ -1,26 +1,25 @@
-<nav mat-tab-nav-bar 
-	 mat-align-tabs="end"
-	 animationDuration="2000ms"
-   color="primary">
-  <a mat-tab-link
-     *ngFor="let link of navLinks"
-     [routerLink]="link.path"
-     
-     routerLinkActive #rla="routerLinkActive"
-     (click)="activeLink = link"
-     (click)="firstVisit()"
-     (click)="activeLink.label == 'Favorite' ? clearUnseenFavorites() : false"
-     [active]="activeLink == link">
-
-          {{link.label}}
-
-
+<nav
+mat-tab-nav-bar
+mat-align-tabs="end"
+animationDuration="2000ms"
+color="primary">
+  <a
+  mat-tab-link
+  *ngFor="let link of navLinks"
+  [routerLink]="link.path"
+  routerLinkActive
+  #rla="routerLinkActive"
+  (click)="activeLink = link"
+  (click)="firstVisit()"
+  (click)="activeLink.label == 'Favorite' ? clearUnseenFavorites() : false"
+  [active]="activeLink == link">
+    {{link.label}}
   </a>
-  <div class="navigation__unseen-favorites-counter"
-    [matBadge]="'+'+unseenFavorites" 
-    matBadgeColor="warn" 
-    matBadgePosition="above before" 
-    *ngIf="showUnseenFavorites()">
-
+  <div
+  class="navigation__unseen-favorites-counter"
+  [matBadge]="'+'+unseenFavorites"
+  matBadgeColor="warn"
+  matBadgePosition="above before"
+  *ngIf="showUnseenFavorites()">
   </div>
 </nav>

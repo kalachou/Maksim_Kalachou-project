@@ -1,9 +1,6 @@
-    <h2 class="home__hint" *ngIf="isFirstVisit()">Welcome to currency app! Select an option from above</h2>
-    <h2 class="home__hint" *ngIf="!isFirstVisit()">Welcome back to currency app! Select an option</h2>
-    <div 
-    class="arrow top-right"
-    *ngIf="isFirstVisit()">
-      <div class="curve"></div>
-      <div class="point"></div>
-    </div>
-	
+<h2 class="home__hint" *ngIf="isFirstVisit()">Welcome to currency app! Select an option from above</h2>
+<h2 class="home__hint" *ngIf="!isFirstVisit()">Welcome back to currency app! Select an option</h2>
+<div class="arrow top-right" *ngIf="isFirstVisit()">
+  <div class="curve"></div>
+  <div class="point"></div>
+</div>
